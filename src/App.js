@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./utils/PrivateRoute"
+import { AuthProvider } from "./context/AuthContext";
+import Portfolios from "./pages/Portfolios";
+import Stocks from "./pages/Stocks";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import Nav from "./components/Nav";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <AuthProvider>
+      <div>
+          <Nav />
+        <Routes>
+          <Route path="/" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/stocks" element={<Stocks />} />
+          <Route path="/portfolios" element={<Portfolios />} />
+        </Routes>
+      </div>
+      </AuthProvider>
+    </Router>
   );
 }
 
