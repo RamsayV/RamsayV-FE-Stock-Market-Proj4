@@ -18,7 +18,6 @@ export default function Stocks() {
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
-          logoutUser();
         }
 
         const data = await response.json();
@@ -26,11 +25,12 @@ export default function Stocks() {
         console.log(data);
       } catch (error) {
         console.error('Error:', error);
+        logoutUser(); 
       }
     };
 
     stockData();
-  }, []);
+  }, [authTokens, logoutUser]); 
 
   return (
     <div>
@@ -38,11 +38,13 @@ export default function Stocks() {
       <ul>
         {stocks.map((stock, index) => (
           <li key={index}>
-            
-          Company Name:{stock.company_name},  
-          Ticker Symbol: {stock.ticker_symbol}, 
-          Market Price: {stock.market_price}
-          
+            Company Name: {stock.company_name},  
+            Ticker Symbol: {stock.ticker_symbol}, 
+            Market Price: {stock.market_price},
+            Open Price: {stock.open_price ? stock.open_price : 'N/A'},  
+            Close Price: {stock.close_price ? stock.close_price : 'N/A'},
+            52 Week High: {stock.week_52_high ? stock.week_52_high : 'N/A'},
+            52 Week Low: {stock.week_52_low ? stock.week_52_low : 'N/A'}
           </li>
         ))}
       </ul>
