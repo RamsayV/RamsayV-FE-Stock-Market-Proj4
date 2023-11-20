@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext";
+import AddStock from '../components/AddStock';
 
 export default function Stocks() {
+  const [showAddStockForm, setShowAddStockForm] = useState(false);
   const [stocks, setStocks] = useState([]);
+  const [selectedStock, setSelectedStock] = useState(null);
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -32,22 +35,49 @@ export default function Stocks() {
     stockData();
   }, [authTokens, logoutUser]); 
 
+  const handleStockClick = (stock) => {
+    if (selectedStock && selectedStock.id === stock.id) {
+      setSelectedStock(null);
+    } else {
+      setSelectedStock(stock);
+    }
+  };
   return (
-    <div>
-      <h1>Stocks</h1>
-      <ul>
-        {stocks.map((stock, index) => (
-          <li key={index}>
-            Company Name: {stock.company_name},  
-            Ticker Symbol: {stock.ticker_symbol}, 
-            Market Price: {stock.market_price},
-            Open Price: {stock.open_price ? stock.open_price : 'N/A'},  
-            Close Price: {stock.close_price ? stock.close_price : 'N/A'},
-            52 Week High: {stock.week_52_high ? stock.week_52_high : 'N/A'},
-            52 Week Low: {stock.week_52_low ? stock.week_52_low : 'N/A'}
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-[70vh] flex flex-col items-center md:mx-32 mx-5 mt-10">
+      <div className="text-center w-full">
+        <h1 className="text-5xl font-semibold text-brightGreen mb-2">Stock Market Overview</h1>
+        <button onClick={() => setShowAddStockForm(!showAddStockForm)}> Add Stock</button>
+
+{showAddStockForm && <AddStock />}
+        {selectedStock ? (
+          // Detailed view
+          <div className="bg-white shadow-md rounded-lg p-4">
+            <h2 className="font-semibold text-xl mb-2">Detailed Information</h2>
+            <p><strong>Company Name:</strong> {selectedStock.company_name}</p>
+            <p><strong>Ticker Symbol:</strong> {selectedStock.ticker_symbol}</p>
+            <p><strong>Market Price:</strong> {selectedStock.market_price}</p>
+            <p><strong>Open Price:</strong> {selectedStock.open_price || 'N/A'}</p>
+            <p><strong>Close Price:</strong> {selectedStock.close_price || 'N/A'}</p>
+            <p><strong>52 Week High:</strong> {selectedStock.week_52_high || 'N/A'}</p>
+            <p><strong>52 Week Low:</strong> {selectedStock.week_52_low || 'N/A'}</p>
+            <button className="mt-4" onClick={() => setSelectedStock(null)}>Back to List</button>
+          </div>
+        ) : (
+          // Stock list view
+          <div>
+            <p className="text-lg text-lightText mb-5">Explore real-time stock market data and insights.</p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {stocks.map((stock, index) => (
+                <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleStockClick(stock)}>
+                  <h3 className="font-semibold mb-2">{stock.company_name} <span className="text-sm text-gray-500">({stock.ticker_symbol})</span></h3>
+              <p><strong>Market Price:</strong> {stock.market_price}</p>
+              <p><strong>Open Price:</strong> {stock.open_price || 'N/A'}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
