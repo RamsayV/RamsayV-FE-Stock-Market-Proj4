@@ -1,9 +1,15 @@
 import React, { useState,useContext } from 'react';
 import AuthContext from "../context/AuthContext";
 import Button from "../layout/Button"
+import { jwtDecode } from 'jwt-decode';
 
-export default function AddStock() {
+export default function AddStock( {onStockAdded, setIsUpdated} ) {
+
+
     let { authTokens} = useContext(AuthContext);
+    const decoded_jwt =  jwtDecode(authTokens.access)
+    console.log("decodes_jwt:", decoded_jwt);
+    
   const [stockData, setStockData] = useState({
     ticker_symbol: '',
     company_name: '',
@@ -12,6 +18,7 @@ export default function AddStock() {
     close_price: '',
     week_52_high: '',
     week_52_low: '',
+    // user_id: user_id ? user_id : ""
   });
 
   const handleChange = (e) => {
@@ -34,6 +41,11 @@ export default function AddStock() {
         throw new Error('Network response was not ok');
       }
       console.log("Stock added successfully");
+
+      if (onStockAdded) {
+        onStockAdded();
+        setIsUpdated(true)
+    }
     } catch (error) {
       console.error('Error:', error);
     }

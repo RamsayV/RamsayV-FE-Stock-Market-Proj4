@@ -10,3 +10,21 @@ body{
     color: #000000;
     font-family: 'Inter', sans-serif;
 }
+
+@layer components {
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+  
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #000000;
+      width: 5px;
+      border-radius: 10px;
+    }
+  
+    
+  }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext"
-// import AddPortfolio from '../components/AddPortfolio';
+import AddPortfolio from '../components/AddPortfolio';
 
 
 export default function Portfolios() {
   const [portfolios, setPortfolios] = useState([]);
-  let {authTokens, logoutUser} = useContext(AuthContext)
+  let {authTokens} = useContext(AuthContext)
   
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +20,7 @@ export default function Portfolios() {
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
-          logoutUser()
+         
         }
 
         const data = await response.json();
@@ -32,16 +32,16 @@ export default function Portfolios() {
     };
 
     fetchData();
-  }, []);
+  }, [authTokens.access]);
 
-  // const handleAddPortfolio = (newPortfolio) => {
-  //   setPortfolios([...portfolios, newPortfolio]);
-  // };
+  const handleAddPortfolio = (newPortfolio) => {
+    setPortfolios([...portfolios, newPortfolio]);
+  };
 
   return (
     <div>
       <h1>Portfolios</h1>
-      {/* <AddPortfolio onAdd={handleAddPortfolio} /> */}
+      <AddPortfolio onAdd={handleAddPortfolio} />
       <ul>
         {portfolios.map((portfolio, index) => (
           <li key={index}> 

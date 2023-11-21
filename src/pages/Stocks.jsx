@@ -1,12 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext";
 import AddStock from '../components/AddStock';
+import AddStockPortfolio from '../components/AddStockPortfolio';
+
 
 export default function Stocks() {
   const [showAddStockForm, setShowAddStockForm] = useState(false);
+  const [showAddStockPortfolio, setShowAddStockPortfolio] = useState(false);
+  const [portfolios, setPortfolios] = useState([]);
   const [stocks, setStocks] = useState([]);
   const [selectedStock, setSelectedStock] = useState(null);
-  let { authTokens, logoutUser } = useContext(AuthContext);
+  const [isupdated, setIsUpdated] = useState(false)
+  let { authTokens} = useContext(AuthContext);
+
+ 
 
   useEffect(() => {
     const stockData = async () => {
@@ -25,15 +32,43 @@ export default function Stocks() {
 
         const data = await response.json();
         setStocks(data);
+        console.log(isupdated);
         console.log(data);
+        setIsUpdated(false)
       } catch (error) {
         console.error('Error:', error);
-        logoutUser(); 
+        
       }
     };
 
     stockData();
-  }, [authTokens, logoutUser]); 
+  }, [authTokens.access, isupdated]); 
+
+  useEffect(() => {
+
+    const fetchPortfolios = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/portfolios/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + String(authTokens.access),
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setPortfolios(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchPortfolios();
+  }, [authTokens.access, isupdated] );
 
   const handleStockClick = (stock) => {
     if (selectedStock && selectedStock.id === stock.id) {
@@ -41,14 +76,25 @@ export default function Stocks() {
     } else {
       setSelectedStock(stock);
     }
+
   };
+
+  const handleStockAdded = async () => {
+    setShowAddStockForm(false);
+    setShowAddStockPortfolio(true);
+  };
+
   return (
     <div className="min-h-[70vh] flex flex-col items-center md:mx-32 mx-5 mt-10">
       <div className="text-center w-full">
         <h1 className="text-5xl font-semibold text-brightGreen mb-2">Stock Market Overview</h1>
         <button onClick={() => setShowAddStockForm(!showAddStockForm)}> Add Stock</button>
 
-{showAddStockForm && <AddStock />}
+{showAddStockForm && <AddStock 
+
+onStockAdded={handleStockAdded} setIsUpdated= {setIsUpdated} />}
+{showAddStockPortfolio && <AddStockPortfolio stocks={stocks} portfolios={portfolios} setIsUpdated= {setIsUpdated} />}
+
         {selectedStock ? (
           // Detailed view
           <div className="bg-white shadow-md rounded-lg p-4">

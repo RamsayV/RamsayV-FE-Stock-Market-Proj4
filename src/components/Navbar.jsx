@@ -20,7 +20,7 @@ const Navbar = () => {
         </div>
         <nav className=" hidden md:flex gap-5 font-medium p-1 text-lg">
           <Link
-            to="dashboard"
+            to="/dashboard"
             spy={true}
             smooth={true}
             duration={500}
@@ -66,7 +66,7 @@ const Navbar = () => {
           menu ? "translate-x-0" : "-translate-x-full"
         } md:hidden flex flex-col absolute bg-[#ffffff] left-0 top-20 font-medium text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}>
  <Link
-            to="dashboard"
+            to="/dashboard"
             spy={true}
             smooth={true}
             duration={500}
