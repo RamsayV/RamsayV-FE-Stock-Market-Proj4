@@ -10,7 +10,7 @@ export default function Portfolios() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/portfolios/', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/portfolios/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

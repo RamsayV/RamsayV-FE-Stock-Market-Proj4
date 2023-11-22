@@ -28,7 +28,7 @@ export default function AddStock( {onStockAdded, setIsUpdated} ) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/stocksadd/', { 
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/stocksadd/`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

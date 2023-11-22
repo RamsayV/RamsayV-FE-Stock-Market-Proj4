@@ -19,7 +19,7 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated }) 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/addstockportfolio/', { 
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/addstockportfolio/`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
