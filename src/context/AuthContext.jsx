@@ -90,8 +90,8 @@ export const AuthProvider = ({children}) => {
             }
         }, fourMinutes)
         return ()=> clearInterval(interval)
-
-    }, [authTokens, loading])
+// eslint-disable-next-line 
+    }, [authTokens, loading, ])
 
 
     let contextData = {
