@@ -9,6 +9,10 @@ export default function AddStock( {onStockAdded, setIsUpdated} ) {
     let { authTokens} = useContext(AuthContext);
     const decoded_jwt =  jwtDecode(authTokens.access)
     console.log("decodes_jwt:", decoded_jwt);
+    const userId = String(decoded_jwt.user_id)
+    console.log(userId);
+
+
     
   const [stockData, setStockData] = useState({
     ticker_symbol: '',
@@ -18,7 +22,7 @@ export default function AddStock( {onStockAdded, setIsUpdated} ) {
     close_price: '',
     week_52_high: '',
     week_52_low: '',
-    // user_id: user_id ? user_id : ""
+    user_id: parseInt(userId)
   });
 
   const handleChange = (e) => {

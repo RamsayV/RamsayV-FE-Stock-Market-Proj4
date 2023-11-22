@@ -45,7 +45,8 @@ export default function Portfolios() {
       <ul>
         {portfolios.map((portfolio, index) => (
           <li key={index}> 
-            User: {portfolio.user.username}, Portoflio Name: {portfolio.portfolio_name}
+            Portoflio Name: {portfolio.portfolio_name}
+            Total Value: {portfolio.total_value}
           </li>
         ))}
       </ul>
