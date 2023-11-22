@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import React, { useState} from "react";
+// import AuthContext from "../context/AuthContext";
 
 export default function SignUp() {
     const [username, setUsername] = useState("");

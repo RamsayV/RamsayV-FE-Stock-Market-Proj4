@@ -15,7 +15,7 @@ const LoginPage = () => {
       </div>
 
       <div className="w-full md:w-3/4 lg:w-1/2 hidden lg:block">
-        <img src={img} alt="Decorative Image" />
+        <img src={img} alt="Decorative" />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PrivateRoute from "./utils/PrivateRoute"
+// import PrivateRoute from "./utils/PrivateRoute"
 import { AuthProvider } from "./context/AuthContext";
 import Stocks from "./pages/Stocks";
 import Portfolios from "./pages/Portfolios"
