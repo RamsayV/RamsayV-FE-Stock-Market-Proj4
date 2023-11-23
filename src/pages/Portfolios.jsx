@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext"
 import AddPortfolio from '../components/AddPortfolio';
+import DeletePortfolio from '../components/DeletePortfolio';
+import EditPortfolio from '../components/EditPortfolio';
+
 
 
 export default function Portfolios() {
@@ -38,15 +41,37 @@ export default function Portfolios() {
     setPortfolios([...portfolios, newPortfolio]);
   };
 
+  const handleDeletePortfolio = (deletedPortfolioId) => {
+    setPortfolios(portfolios.filter(portfolio => portfolio.id !== deletedPortfolioId));
+  };
+
+  const handleUpdatePortfolio = (updatedPortfolio) => {
+    const updatedPortfolios = portfolios.map(p => 
+      p.id === updatedPortfolio.id ? updatedPortfolio : p
+    );
+    setPortfolios(updatedPortfolios);
+  };
+   
   return (
-    <div>
-      <h1>Portfolios</h1>
+    <div className="min-h-[70vh] flex flex-col items-center mx-5 mt-10">
+      <h1 className="text-5xl font-semibold leading-tight mb-5">Portfolios</h1>
       <AddPortfolio onAdd={handleAddPortfolio} />
-      <ul>
+      <ul className="w-full md:w-2/4 mt-5">
         {portfolios.map((portfolio, index) => (
-          <li key={index}> 
-            Portoflio Name: {portfolio.portfolio_name}
-            Total Value: {portfolio.total_value}
+          <li key={index} className="bg-white shadow-md rounded-lg p-4 mb-4 flex justify-between items-center">
+            <div>
+              <h3 className="text-xl font-semibold">{portfolio.portfolio_name}</h3>
+              <p className="text-lightText mt-2">Total Value: {portfolio.total_value}</p>
+            </div>
+            <DeletePortfolio 
+              portfolioId={portfolio.id} 
+              onPortfolioDeleted={handleDeletePortfolio}
+            />
+            
+            <EditPortfolio 
+              portfolio={portfolio} 
+              onPortfolioUpdated={handleUpdatePortfolio}
+            />
           </li>
         ))}
       </ul>

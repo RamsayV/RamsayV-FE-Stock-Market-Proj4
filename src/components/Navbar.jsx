@@ -21,33 +21,24 @@ const Navbar = () => {
         <nav className=" hidden md:flex gap-5 font-medium p-1 text-lg">
           <Link
             to="/dashboard"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             DashBoard
           </Link>
           <Link
             to="Portfolios"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             Portfolio
           </Link>
           <Link
             to="/stocks"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             Stocks
           </Link>
           {user ? (
-            <p onClick={logoutUser}>Logout</p>
+            <p className="hover:text-[#539165] transition-all cursor-pointer" onClick={logoutUser}>Logout</p>
           ) : (
             <>
             <Link to="/login">Login</Link> 
@@ -67,44 +58,30 @@ const Navbar = () => {
         } md:hidden flex flex-col absolute bg-[#ffffff] left-0 top-20 font-medium text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}>
  <Link
             to="/dashboard"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             DashBoard
           </Link>
           <Link
             to="Portfolios"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             Portfolio
           </Link>
           <Link
             to="Transactions"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             Transactions
           </Link>
           <Link
             to="/stocks"
-            spy={true}
-            smooth={true}
-            duration={500}
             className="hover:text-[#539165] transition-all cursor-pointer"
           >
             Stocks
             </Link>
           {user ? (
-            <p spy={true}
-            smooth={true}
-            duration={500}
+            <p 
             className="hover:text-[#539165] transition-all cursor-pointer" onClick={logoutUser}>Logout</p>
           ) : (
             <Link to="/login">Login</Link>

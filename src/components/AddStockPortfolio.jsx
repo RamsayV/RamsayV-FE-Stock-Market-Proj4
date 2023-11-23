@@ -57,40 +57,71 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated }) 
   };
 
   return (
-    <div>
-        <h1>Add to Stock Portfolio</h1>
-        <form onSubmit={handleSubmit}>
-          <select 
-            name="stock"
-            value={portfolioData.stock}
-            onChange={handleChange}
-          >
-            {stocks.map(stock => (
-              <option key={stock.id} value={stock.id}>
-                {stock.company_name} ({stock.ticker_symbol})
-              </option>
-            ))}
-          </select>
-          <input 
-            name="quantity"
-            type="number"
-            value={portfolioData.quantity}
-            onChange={handleChange}
-            placeholder="Quantity"
-          />
-          <select 
-            name="portfolio"
-            value={portfolioData.portfolio}
-            onChange={handleChange}
-          >
-           
-            {portfolios.map(portfolio => (
-              <option key={portfolio.id} value={portfolio.id}>
-                {portfolio.portfolio_name}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Add to Portfolio</button>
+    <div className="md:w-2/4 w-full mx-auto p-6 bg-white shadow-md rounded-lg">
+        <h1 className="text-3xl font-semibold text-brightGreen mb-6">Add to Stock Portfolio</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Stock Select */}
+          <div className="space-y-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="stock">
+              Stock
+            </label>
+            <select 
+              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="stock"
+              value={portfolioData.stock}
+              onChange={handleChange}
+            >
+              {stocks.map(stock => (
+                <option key={stock.id} value={stock.id}>
+                  {stock.company_name} ({stock.ticker_symbol})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Quantity Input */}
+          <div className="space-y-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="quantity">
+              Quantity
+            </label>
+            <input 
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="quantity"
+              type="number"
+              value={portfolioData.quantity}
+              onChange={handleChange}
+              placeholder="Quantity"
+            />
+          </div>
+
+          {/* Portfolio Select */}
+          <div className="space-y-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="portfolio">
+              Portfolio
+            </label>
+            <select 
+              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="portfolio"
+              value={portfolioData.portfolio}
+              onChange={handleChange}
+            >
+              {portfolios.map(portfolio => (
+                <option key={portfolio.id} value={portfolio.id}>
+                  {portfolio.portfolio_name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
+            <button 
+              className="bg-brightGreen hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Add to Portfolio
+            </button>
+          </div>
         </form>
     </div>
   );

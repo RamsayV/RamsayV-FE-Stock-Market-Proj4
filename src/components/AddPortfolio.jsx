@@ -5,9 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 export default function AddPortfolio({ onAdd }) {
   let { authTokens } = useContext(AuthContext);
   const decoded_jwt =  jwtDecode(authTokens.access)
-  console.log("decodes_jwt:", decoded_jwt);
   const userId = String(decoded_jwt.user_id)
-  console.log(userId);
 
 
   const initialState= {
@@ -48,23 +46,31 @@ export default function AddPortfolio({ onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add New Portfolio</h2>
-      <input
-        type="text"
-        name="portfolio_name"
-        onChange={handleChange}
-        placeholder="Enter Portfolio Name"
-        required
-      />
-      <input
-        type="number"
-        name="total_value"
-        onChange={handleChange}
-        placeholder="Enter TotalValue"
-        required
-      />
-      <button type="submit">Add Portfolio</button>
+    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mt-5 max-w-md mx-auto">
+      <h2 className="text-3xl font-semibold mb-4">Add New Portfolio</h2>
+      <div className="mb-4">
+        <input
+          type="text"
+          name="portfolio_name"
+          onChange={handleChange}
+          placeholder="Enter Portfolio Name"
+          className="w-full p-2 border border-gray-300 rounded-md"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="number"
+          name="total_value"
+          onChange={handleChange}
+          placeholder="Enter Total Value"
+          className="w-full p-2 border border-gray-300 rounded-md"
+          required
+        />
+      </div>
+      <button type="submit" className="text-white bg-brightGreen hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+        Add Portfolio
+      </button>
     </form>
   );
 }
