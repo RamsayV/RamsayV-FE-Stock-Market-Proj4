@@ -55,7 +55,7 @@ export default function Portfolios() {
    
   return (
     <div className="min-h-[70vh] flex flex-col items-center mx-5 mt-10">
-      <h1 className="text-5xl font-semibold leading-tight mb-5">Portfolios</h1>
+      <h1 className="text-5xl font-semibold leading-tight mb-5 text-brightGreen">Portfolios</h1>
       <AddPortfolio onAdd={handleAddPortfolio} />
       <ul className="w-full md:w-2/4 mt-5">
         {portfolios.map((portfolio, index) => (

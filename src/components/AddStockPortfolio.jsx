@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import AuthContext from "../context/AuthContext";
 import { jwtDecode } from 'jwt-decode';
 
-export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated }) {
+export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated, onStockPortfolioAdded }) {
 
   console.log(portfolios)
+  console.log(stocks);
   let { authTokens } = useContext(AuthContext);
   const decoded_jwt =  jwtDecode(authTokens.access)
   const userId = String(decoded_jwt.user_id)
@@ -49,6 +50,7 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated }) 
       console.log("Stock portfolio updated successfully");
       setIsUpdated(true)
       console.log(setIsUpdated())
+      onStockPortfolioAdded();
     } catch (error) {
       console.error('Error:', error);
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import AuthContext from "../context/AuthContext";
 import AddStock from '../components/AddStock';
 import AddStockPortfolio from '../components/AddStockPortfolio';
@@ -101,11 +102,16 @@ export default function Stocks() {
     setShowAddStockForm(!showAddStockForm);
   };
 
+  const handleStockPortfolioAdded = () => {
+    setShowAddStockPortfolio(false); 
+    setIsUpdated(true); 
+  };
 
   return (
   <div className="min-h-[70vh] flex flex-col items-center md:mx-32 mx-5 mt-10">
   <div className="text-center w-full">
-    <h1 className="text-5xl font-semibold text-brightGreen mb-2">Stock Market Overview</h1>
+    <h1 className="text-5xl font-semibold text-brightGreen mb-2">Stocks</h1>
+   <Link to="/dashboard"> <p className="text-lg text-lightText mb-5">Explore real-time stock market data and insights.</p></Link>
     <button 
           onClick={toggleAddStockForm}
           className="text-white bg-brightGreen hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-4"
@@ -114,7 +120,7 @@ export default function Stocks() {
         </button>
 
     {showAddStockForm && <AddStock onStockAdded={handleStockAdded} setIsUpdated={setIsUpdated} />}
-    {showAddStockPortfolio && <AddStockPortfolio stocks={stocks} portfolios={portfolios} setIsUpdated={setIsUpdated} />}
+    {showAddStockPortfolio && <AddStockPortfolio stocks={stocks} portfolios={portfolios} setIsUpdated={setIsUpdated} onStockPortfolioAdded={handleStockPortfolioAdded} />}
 
     {selectedStock && !isEditing ? (
       // Detailed view
@@ -135,7 +141,7 @@ export default function Stocks() {
         </button>
         <button
           onClick={() => setSelectedStock(null)}
-          className="text-white bg-gray-500 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5"
+          className="text-white bg-gray-500 hover:bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2"
         >
           Back to List
         </button>
@@ -155,7 +161,7 @@ export default function Stocks() {
     {!selectedStock && (
       // Stock list view
       <div>
-        <p className="text-lg text-lightText mb-5">Explore real-time stock market data and insights.</p>
+        
         <div className="grid md:grid-cols-2 gap-4">
           {stocks.map((stock, index) => (
             <div 
