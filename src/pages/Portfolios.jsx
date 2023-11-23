@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext"
 import AddPortfolio from '../components/AddPortfolio';
 import DeletePortfolio from '../components/DeletePortfolio';
 import EditPortfolio from '../components/EditPortfolio';
+import StockPortfolio from '../components/StockPortfolio';
 
 
 
@@ -28,7 +29,7 @@ export default function Portfolios() {
 
         const data = await response.json();
         setPortfolios(data);
-        console.log(data);
+
       } catch (error) {
         console.error('Error:', error);
       }
@@ -62,6 +63,7 @@ export default function Portfolios() {
             <div>
               <h3 className="text-xl font-semibold">{portfolio.portfolio_name}</h3>
               <p className="text-lightText mt-2">Total Value: {portfolio.total_value}</p>
+              <StockPortfolio portfolioId={portfolio.id} />
             </div>
             <DeletePortfolio 
               portfolioId={portfolio.id} 

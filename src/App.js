@@ -11,6 +11,7 @@ import Footer from "./components/Footer"
 import SignUpPage from "./pages/SignUpPage";
 import Dashboard from "./pages/Dashboard";
 import StockContext from "./context/StockContext";
+import StockNews from "./pages/StockMarketNews";
 
 
 
@@ -30,6 +31,7 @@ const [stockSymbol, setStockSymbol] = useState("FB")
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/stocks" element={<Stocks />} />
+          <Route path="/news" element={<StockNews />} />
           <Route path="/portfolios" element={<Portfolios />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<HomePage />} />

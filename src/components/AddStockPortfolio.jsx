@@ -7,9 +7,7 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated }) 
   console.log(portfolios)
   let { authTokens } = useContext(AuthContext);
   const decoded_jwt =  jwtDecode(authTokens.access)
-  console.log("decodes_jwt:", decoded_jwt);
   const userId = String(decoded_jwt.user_id)
-  console.log(userId);
 
   const [portfolioData, setPortfolioData] = useState({
     stock: '',

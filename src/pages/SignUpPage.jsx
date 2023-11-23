@@ -1,10 +1,10 @@
-import React, { useState} from "react";
-// import AuthContext from "../context/AuthContext";
+import React, { useState } from 'react';
+import img from '../assets/VaX01A01.svg'; // Assuming you want to use the same image
 
-export default function SignUp() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+const SignUp = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
     async function createUser() {
         try {
@@ -44,38 +44,39 @@ export default function SignUp() {
     };
 
     return (
-        <div>
-            <h1>Sign up</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
+        <div className="min-h-screen flex items-center justify-center px-4">
+            <div className="max-w-md w-full space-y-8">
+                <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                     <input
+                        className="bg-white text-gray-700 border border-gray-300 rounded-lg py-2 px-4 block w-full focus:border-blue-500 focus:outline-none"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Enter Username"
                     />
-                </label>
-                <br />
-                <label>
-                    Password:
                     <input
+                        className="bg-white text-gray-700 border border-gray-300 rounded-lg py-2 px-4 block w-full focus:border-blue-500 focus:outline-none"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter Password"
                     />
-                </label>
-                <br />
-                <label>
-                    Password Confirmation:
                     <input
+                        className="bg-white text-gray-700 border border-gray-300 rounded-lg py-2 px-4 block w-full focus:border-blue-500 focus:outline-none"
                         type="password"
                         value={passwordConfirmation}
                         onChange={(e) => setPasswordConfirmation(e.target.value)}
+                        placeholder="Confirm Password"
                     />
-                </label>
-                <br />
-                <button type="submit">Sign Up</button>
-            </form>
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign Up</button>
+                </form>
+            </div>
+
+            <div className="w-full md:w-3/4 lg:w-1/2 hidden lg:block">
+                <img src={img} alt="Decorative" />
+            </div>
         </div>
     );
-}
+};
+
+export default SignUp;
