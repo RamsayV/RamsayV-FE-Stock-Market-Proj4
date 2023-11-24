@@ -49,7 +49,6 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated, on
       }
       console.log("Stock portfolio updated successfully");
       setIsUpdated(true)
-      console.log(setIsUpdated())
       onStockPortfolioAdded();
     } catch (error) {
       console.error('Error:', error);
@@ -71,6 +70,7 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated, on
               value={portfolioData.stock}
               onChange={handleChange}
             >
+              <option value = "0" >Select A stock</option>
               {stocks.map(stock => (
                 <option key={stock.id} value={stock.id}>
                   {stock.company_name} ({stock.ticker_symbol})
@@ -105,6 +105,7 @@ export default function AddStockPortfolio({ stocks, portfolios, setIsUpdated, on
               value={portfolioData.portfolio}
               onChange={handleChange}
             >
+              <option value = "0" >Select A Portfolio</option>
               {portfolios.map(portfolio => (
                 <option key={portfolio.id} value={portfolio.id}>
                   {portfolio.portfolio_name}
