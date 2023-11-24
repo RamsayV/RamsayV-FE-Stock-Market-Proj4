@@ -20,7 +20,7 @@ export default function Stocks() {
    useEffect(() => {
     const stockData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/stocks/', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/stocks/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,6 @@ export default function Stocks() {
         const data = await response.json();
         setStocks(data);
         console.log(isupdated);
-        console.log(data);
         setIsUpdated(false)
       } catch (error) {
         console.error('Error:', error);
